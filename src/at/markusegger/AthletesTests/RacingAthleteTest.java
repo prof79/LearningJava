@@ -41,17 +41,16 @@ public class RacingAthleteTest
 	@Test
 	public void testRacingAthlete()
 	{
-		assertNotEquals("RacingAthlete not null",_ra, null);
+		assertNotEquals("RacingAthlete not null", null, _ra);
 	}
 	
 	@Test
 	public void testSetAndGet()
 	{
 		_ra.setContestantID(_id);
-		
 		_ra.setName(_name);
 		
-		assertEquals("ID is equal", _ra.getContestantID(), _id);
-		assertEquals("Name ist equal", _ra.getName(), _name);
+		assertEquals("ID is equal", _id, _ra.getContestantID());
+		assertEquals("Name ist equal", _name, _ra.getName());
 	}
 }
