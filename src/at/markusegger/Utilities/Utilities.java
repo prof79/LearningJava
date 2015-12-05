@@ -11,7 +11,7 @@ package at.markusegger.Utilities;
  */
 public final class Utilities
 {
-	/*
+	/**
 	 * A null-safe comparison method.
 	 * 
 	 * @param object1		The first object to compare.

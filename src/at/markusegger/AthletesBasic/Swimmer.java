@@ -17,7 +17,7 @@ public class Swimmer extends RacingAthlete
 		super();
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see at.markusegger.AthletesBasic.RaceParticipant#performRaceActivity()
 	 */
 	public String performRaceActivity()

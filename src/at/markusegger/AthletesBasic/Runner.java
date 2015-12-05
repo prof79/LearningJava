@@ -17,11 +17,11 @@ public class Runner extends RacingAthlete
 		super();
 	}
 
-	/*
+	/**
 	 * Explicit parameterised constructor.
 	 * 
-	 * @param int contestantID			The contestant ID.
-	 * @param String name				The name of the Athlete.
+	 * @param contestantID		The contestant ID.
+	 * @param name				The name of the Athlete.
 	 */
 	public Runner(int contestantID, String name)
 	{
@@ -29,7 +29,7 @@ public class Runner extends RacingAthlete
 		setName(name);
 	}
 	
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see at.markusegger.AthletesBasic.RaceParticipant#performRaceActivity()
 	 */
 	public String performRaceActivity()
