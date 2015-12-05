@@ -56,8 +56,7 @@ public class RunnerTest
 	@Test
 	public void testRunnerActivity()
 	{
-		assertEquals("Runner.performRaceActivity() does not contain activity '" + activity + "'"
-							, true
+		assertTrue("Runner.performRaceActivity() does not contain activity '" + activity + "'"
 							, r.performRaceActivity().contains(activity));
 	}
 }

@@ -41,7 +41,7 @@ public class RacingAthleteTest
 	@Test
 	public void testRacingAthlete()
 	{
-		assertNotEquals("RacingAthlete not null", null, _ra);
+		assertNotNull("RacingAthlete not null", _ra);
 	}
 	
 	@Test

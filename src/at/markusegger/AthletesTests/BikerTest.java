@@ -56,8 +56,23 @@ public class BikerTest
 	@Test
 	public void testBikerActivity()
 	{
-		assertEquals("Biker.performRaceActivity() does not contain activity '" + activity + "'"
-							, true
+		assertTrue("Biker.performRaceActivity() does not contain activity '" + activity + "'"
 							, b.performRaceActivity().contains(activity));
+	}
+	
+	@Test
+	public void testToString()
+	{
+		b.setContestantID(id);
+		b.setName(name);
+		
+		String bikerString = b.toString();
+		
+		boolean containsActivity = bikerString.contains(activity);
+		boolean containsID = bikerString.contains(Integer.toString(id));
+		boolean containsName = bikerString.contains(name);
+		
+		assertTrue("Biker.toString() lacks information. Is: " + b.toString()
+						, containsActivity && containsID && containsName);
 	}
 }
