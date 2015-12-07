@@ -9,6 +9,8 @@ package at.markusegger.AthletesBasic;
  */
 public class Runner extends RacingAthlete
 {
+	String _shoeBrand;
+	
 	/**
 	 * Default parameterless constructor.
 	 */
@@ -21,12 +23,16 @@ public class Runner extends RacingAthlete
 	 * Explicit parameterised constructor.
 	 * 
 	 * @param contestantID		The contestant ID.
-	 * @param name				The name of the Athlete.
+	 * @param name				The name of the athlete.
+	 * @param shoeBrand			The brand of shoes used by the athlete.
 	 */
-	public Runner(int contestantID, String name)
+	public Runner(int contestantID, String name, String shoeBrand)
 	{
+		super();
+		
 		setContestantID(contestantID);
 		setName(name);
+		setShoeBrand(shoeBrand);
 	}
 	
 	/** (non-Javadoc)
@@ -35,5 +41,25 @@ public class Runner extends RacingAthlete
 	public String performRaceActivity()
 	{
 		return "Running";
+	}
+	
+	/**
+	 * Get the shoe brand used by the athlete.
+	 * 
+	 * @return The brand name of the shoes.
+	 */
+	public String getShoeBrand()
+	{
+		return _shoeBrand;
+	}
+	
+	/**
+	 * Sets the brand of shoes used.
+	 * 
+	 * @param newShoeBrand		Sets the new shoe brand used by the athlete.
+	 */
+	public void setShoeBrand(String newShoeBrand)
+	{
+		_shoeBrand = newShoeBrand;
 	}
 }

@@ -20,6 +20,7 @@ public class RunnerTest
 	int id = 47118181;
 	String activity = "Running";
 	String name = "Gwen";
+	String shoes = "New Balance";
 	
 	/**
 	 * Setup for each test case.
@@ -58,5 +59,29 @@ public class RunnerTest
 	{
 		assertTrue("Runner.performRaceActivity() does not contain activity '" + activity + "'"
 							, r.performRaceActivity().contains(activity));
+	}
+	
+	@Test
+	public void testRunnerToString()
+	{
+		r.setContestantID(id);
+		r.setName(name);
+		r.setShoeBrand(shoes);
+		
+		assertEquals("ID does not match"
+						, id
+						, r.getContestantID());
+		
+		assertEquals("Name does not match"
+						, name
+						, r.getName());
+		
+		assertEquals("Activity does not match"
+						, activity
+						, r.performRaceActivity());
+		
+		assertEquals("Shoes not found"
+						, shoes
+						, r.getShoeBrand());
 	}
 }

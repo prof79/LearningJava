@@ -6,12 +6,14 @@ package at.markusegger.AthletesBasic;
 /**
  * @author MarkusME
  *
+ * Biker is another type of athlete.
  */
 public class Biker implements RaceParticipant, Person
 {
 	int _id;
 	String _name;
 	int _age;
+	boolean _usingClips;
 	
 	/* (non-Javadoc)
 	 * @see at.markusegger.AthletesBasic.RaceParticipant#getContestantID()
@@ -66,7 +68,32 @@ public class Biker implements RaceParticipant, Person
 	
 	@Override
 	public String toString()
+	{		
+		return String.format("%s: %s with ID %d is %s. Using clips? %b"
+								, getClass().getName()
+								, getName()
+								, getContestantID()
+								, performRaceActivity()
+								, getUsingClips());
+	}
+	
+	/**
+	 * Getter for using clips property.
+	 * 
+	 * @return	Does the biker use clips?
+	 */
+	public boolean getUsingClips()
 	{
-		return getClass().getName() + ": " + getName() + " with ID " + getContestantID() + " is " + performRaceActivity() + ".";
+		return _usingClips;
+	}
+	
+	/**
+	 * Setter for clip usage.
+	 * 
+	 * @param usingClips	Biker is using clips?
+	 */
+	public void setUsingClips(boolean usingClips)
+	{
+		_usingClips = usingClips;
 	}
 }

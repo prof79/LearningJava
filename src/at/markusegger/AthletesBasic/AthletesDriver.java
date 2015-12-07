@@ -5,7 +5,7 @@ package at.markusegger.AthletesBasic;
 
 /**
  * @author MarkusME
- *
+ *{
  * The athletes management console UI.
  * 
  */
@@ -23,7 +23,7 @@ public class AthletesDriver
 		runner1.setContestantID(42731);
 		runner1.setName("Tom");
 
-		Runner runner2 = new Runner(2972003, "Hilda");
+		Runner runner2 = new Runner(2972003, "Hilda", "Naykey");
 		
 		Swimmer swimmer1 = new Swimmer();
 		
