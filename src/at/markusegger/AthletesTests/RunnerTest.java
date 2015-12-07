@@ -14,12 +14,12 @@ import at.markusegger.AthletesBasic.*;
  * @author MarkusME
  *
  */
-public class RunnerTest
+public class RunnerTest extends RacingAthleteTest
 {
-	Runner r;
-	int id = 47118181;
+	Runner runner1;
+
 	String activity = "Running";
-	String name = "Gwen";
+	
 	String shoes = "New Balance";
 	
 	/**
@@ -30,7 +30,9 @@ public class RunnerTest
 	@Before
 	public void setUp() throws Exception
 	{
-		r = new Runner();
+		super.setUp();
+		
+		runner1 = new Runner();
 	}
 
 	/**
@@ -41,47 +43,72 @@ public class RunnerTest
 	@After
 	public void tearDown() throws Exception
 	{
-		r = null;
+		runner1 = null;
+		
+		super.tearDown();
+	}
+	
+	/**
+	 * Tests the constructors.
+	 */
+	@Test
+	public void testConstructors()
+	{
+		super.testConstructors();
+		
+		Runner specificRunner = (Runner) getSpecificRacingAthlete();
+		
+		assertNotNull("Specific Runner is null", specificRunner);
+		
+		assertEquals("Specific Runner constructor: name"
+						, _name
+						, specificRunner.getName());
+		
+		assertEquals("Specific Runner constructor: age"
+						, _age
+						, specificRunner.getAge());
+		
+		assertEquals("Specific Runner constructor: id"
+						, _id
+						, specificRunner.getContestantID());
+		
+		assertEquals("Specific Runner constructor: shoeBrand"
+						, shoes
+						, specificRunner.getShoeBrand());
+	}
+	
+	/**
+	 * Tests the performRaceActivity() method.
+	 */
+	@Override
+	public void testPerformRaceActivity()
+	{
+		super.testPerformRaceActivity(activity);		
+	}
+	
+	@Test
+	public void testToString()
+	{
+		super.testToString();
+		
+		runner1.setShoeBrand(shoes);
+				
+		assertTrue("Activity not found in string"
+						, runner1.toString().contains(activity));
+		
+		assertTrue("Shoes not found in string"
+						, runner1.toString().contains(shoes));
 	}
 
-	@Test
-	public void testRunnerID()
+	@Override
+	protected RacingAthlete getDefaultRacingAthlete()
 	{
-		r.setContestantID(id);
-		
-		assertEquals("Runner ID not set as expected"
-							, id
-							, r.getContestantID());
+		return new Runner();
 	}
-	
-	@Test
-	public void testRunnerActivity()
+
+	@Override
+	protected RacingAthlete getSpecificRacingAthlete()
 	{
-		assertTrue("Runner.performRaceActivity() does not contain activity '" + activity + "'"
-							, r.performRaceActivity().contains(activity));
-	}
-	
-	@Test
-	public void testRunnerToString()
-	{
-		r.setContestantID(id);
-		r.setName(name);
-		r.setShoeBrand(shoes);
-		
-		assertEquals("ID does not match"
-						, id
-						, r.getContestantID());
-		
-		assertEquals("Name does not match"
-						, name
-						, r.getName());
-		
-		assertEquals("Activity does not match"
-						, activity
-						, r.performRaceActivity());
-		
-		assertEquals("Shoes not found"
-						, shoes
-						, r.getShoeBrand());
+		return new Runner(_id, _name, _age, shoes);
 	}
 }

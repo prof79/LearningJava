@@ -4,10 +4,10 @@
 package at.markusegger.AthletesBasic;
 
 /**
- * @author MarkusME
- *{
- * The athletes management console UI.
+ * The athletes' management console UI.
  * 
+ * @author MarkusME
+ * @version 0.9
  */
 public class AthletesDriver
 {
@@ -22,13 +22,15 @@ public class AthletesDriver
 		
 		runner1.setContestantID(42731);
 		runner1.setName("Tom");
-
-		Runner runner2 = new Runner(2972003, "Hilda", "Naykey");
+		runner1.setAge(38);
+		
+		Runner runner2 = new Runner(2972003, "Hilda", 47, "Naykey");
 		
 		Swimmer swimmer1 = new Swimmer();
 		
 		swimmer1.setContestantID(201102);
 		swimmer1.setName("Tanya");
+		swimmer1.setAge(53);
 		
 		Biker biker1 = new Biker();
 		

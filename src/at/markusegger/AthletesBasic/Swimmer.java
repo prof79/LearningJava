@@ -4,6 +4,8 @@
 package at.markusegger.AthletesBasic;
 
 /**
+ * Swimmer is another type of athlete.
+ * 
  * @author MarkusME
  *
  */

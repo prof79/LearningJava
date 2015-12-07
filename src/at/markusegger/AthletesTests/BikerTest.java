@@ -14,31 +14,29 @@ import at.markusegger.AthletesBasic.*;
  * @author MarkusME
  *
  */
-public class BikerTest
+public class BikerTest extends RacingAthleteTest
 {
 	Biker biker1;
 	
-	String name = "Peter";
-	int age = 28;
-	
-	int id = 18733246;
 	String activity = "Biking";
 	
 	boolean usingClips = true;
 	
 	/**
-	 * Setup for each test case.
+	 * Set-up before each test case.
 	 * 
 	 * @throws Exception
 	 */
 	@Before
 	public void setUp() throws Exception
 	{
-		biker1 = new Biker();
+		super.setUp();
+		
+		biker1 = (Biker) getDefaultRacingAthlete();
 	}
 
 	/**
-	 * Clean up after each test case.
+	 * Clean-up after each test case.
 	 * 
 	 * @throws Exception
 	 */
@@ -46,6 +44,8 @@ public class BikerTest
 	public void tearDown() throws Exception
 	{
 		biker1 = null;
+		
+		super.tearDown();
 	}
 
 	/**
@@ -54,40 +54,25 @@ public class BikerTest
 	@Test
 	public void testConstructors()
 	{
-		assertNotNull("Default constructor returned null object"
-						, biker1);
-		
+		super.testConstructors();
+				
 		//Biker biker2 = new Biker(...);
 	}
-	
-	/**
-	 * Tests the contestantID setter/getter.
-	 */
-	@Test
-	public void testBikerID()
-	{
-		biker1.setContestantID(id);
 		
-		assertEquals("Biker ID not set as expected"
-							, id
-							, biker1.getContestantID());
-	}
-	
 	/**
 	 * Tests the performRaceActivity() method.
 	 */
-	@Test
-	public void testBikerActivity()
+	@Override
+	public void testPerformRaceActivity()
 	{
-		assertTrue("Biker.performRaceActivity() does not contain activity '" + activity + "'"
-							, biker1.performRaceActivity().contains(activity));
+		super.testPerformRaceActivity(activity);
 	}
 	
 	/**
 	 * Tests the setter/getter for usingClips.
 	 */
 	@Test
-	public void testBikerClips()
+	public void testUsingClips()
 	{
 		biker1.setUsingClips(usingClips);
 		
@@ -102,30 +87,24 @@ public class BikerTest
 	@Test
 	public void testToString()
 	{
-		biker1.setContestantID(id);
-		biker1.setName(name);
+		super.testToString();
 		
-		String bikerString = biker1.toString();
+		assertTrue("Biker.toString() does not contain activity"
+						, biker1.toString().contains(activity));
 		
-		boolean containsActivity = bikerString.contains(activity);
-		boolean containsID = bikerString.contains(Integer.toString(id));
-		boolean containsName = bikerString.contains(name);
-		boolean containsClips = bikerString.toLowerCase().contains("clips");
-		
-		assertTrue("Biker.toString() lacks information. Is: " + biker1.toString()
-						, containsActivity && containsID && containsName && containsClips);
+		assertTrue("Biker.toString() does not contain clips"
+						, biker1.toString().contains("clips"));
 	}
 	
-	/**
-	 * Test the age setter/getter.
-	 */
-	@Test
-	public void testSetGetAge()
+	@Override
+	protected RacingAthlete getDefaultRacingAthlete()
 	{
-		biker1.setAge(age);
-		
-		assertEquals("Age doesn't match"
-						, age
-						, biker1.getAge());
+		return new Biker();
+	}
+
+	@Override
+	protected RacingAthlete getSpecificRacingAthlete()
+	{
+		return new Biker();
 	}
 }

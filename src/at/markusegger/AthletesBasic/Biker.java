@@ -8,31 +8,18 @@ package at.markusegger.AthletesBasic;
  *
  * Biker is another type of athlete.
  */
-public class Biker implements RaceParticipant, Person
+public class Biker extends RacingAthlete
 {
-	int _id;
-	String _name;
-	int _age;
 	boolean _usingClips;
 	
-	/* (non-Javadoc)
-	 * @see at.markusegger.AthletesBasic.RaceParticipant#getContestantID()
+	/**
+	 * Parameterless constructor
 	 */
-	@Override
-	public int getContestantID()
+	public Biker()
 	{
-		return _id;
+		super();
 	}
-
-	/* (non-Javadoc)
-	 * @see at.markusegger.AthletesBasic.RaceParticipant#setContestantID(int)
-	 */
-	@Override
-	public void setContestantID(int newContestantID)
-	{
-		_id = newContestantID;
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see at.markusegger.AthletesBasic.RaceParticipant#performRaceActivity()
 	 */
@@ -41,42 +28,7 @@ public class Biker implements RaceParticipant, Person
 	{
 		return "Biking";
 	}
-
-	@Override
-	public String getName()
-	{
-		return _name;
-	}
-
-	@Override
-	public void setName(String newName)
-	{
-		_name = newName;
-	}
-
-	@Override
-	public int getAge()
-	{
-		return _age;
-	}
-
-	@Override
-	public void setAge(int newAge)
-	{
-		_age = newAge;
-	}
-	
-	@Override
-	public String toString()
-	{		
-		return String.format("%s: %s with ID %d is %s. Using clips? %b"
-								, getClass().getName()
-								, getName()
-								, getContestantID()
-								, performRaceActivity()
-								, getUsingClips());
-	}
-	
+		
 	/**
 	 * Getter for using clips property.
 	 * 
@@ -96,4 +48,17 @@ public class Biker implements RaceParticipant, Person
 	{
 		_usingClips = usingClips;
 	}
+	
+	/**
+	 * Human-readable output of the Biker instance.
+	 * 
+	 * @return A String describing the Biker instance.
+	 */
+	@Override
+	public String toString()
+	{		
+		return String.format("%s Using clips? %b"
+								, super.toString()
+								, getUsingClips());
+	}	
 }

@@ -22,5 +22,4 @@ public interface RaceParticipant
 	void setContestantID(int newContestantID);
 	
 	String performRaceActivity();
-
 }

@@ -11,46 +11,140 @@ import org.junit.Test;
 import at.markusegger.AthletesBasic.*;
 
 /**
+ * Tests the RacingAthlete class.
+ * 
  * @author MarkusME
- *
+ * @version 0.8
  */
-public class RacingAthleteTest
+abstract public class RacingAthleteTest
 {
-	RacingAthlete _ra;
-	String _name = "Hugo";
-	int _id = 4711839;
+	// Tested Class
+	private RacingAthlete _ra;
 	
+	// Person
+	protected String _name = "Hugo";
+	protected int _age = 97;
+	
+	// RaceParticipant
+	protected int _id = 4711839;
+	
+	abstract protected RacingAthlete getDefaultRacingAthlete();
+	abstract protected RacingAthlete getSpecificRacingAthlete();
+	
+	/**
+	 * Initial set-up before each test.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception
 	{
-		_ra = new RacingAthlete() {
-			
-			@Override
-			public String performRaceActivity() {
-				return "abstract";
-			}
-		};
+		_ra = getDefaultRacingAthlete();
 	}
 	
+	/**
+	 * Clean-up after each test.
+	 * 
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception
 	{
 		_ra = null;
 	}
 	
+	/**
+	 * Tests the constructors.
+	 */
 	@Test
-	public void testRacingAthlete()
+	public void testConstructors()
 	{
-		assertNotNull("RacingAthlete not null", _ra);
+		assertNotNull("Default RacingAthlete is null", _ra);
 	}
-	
+		
+	/**
+	 * Person: Test the name setter/getter.
+	 */
 	@Test
-	public void testSetAndGet()
+	public void testSetGetName()
 	{
-		_ra.setContestantID(_id);
 		_ra.setName(_name);
 		
-		assertEquals("ID is equal", _id, _ra.getContestantID());
-		assertEquals("Name ist equal", _name, _ra.getName());
+		assertEquals("Name is not equal"
+						, _name
+						, _ra.getName());
+	}
+	
+	/** Person: Test the age setter/getter.
+	 * 
+	 */
+	@Test
+	public void testSetGetAge()
+	{
+		_ra.setAge(_age);
+		
+		assertEquals("Age is not equal"
+						, _age
+						, _ra.getAge());
+	}
+	
+	/**
+	 * RaceParticipant: Test the contestantID setter/getter.
+	 */
+	@Test
+	public void testSetGetContestantID()
+	{
+		_ra.setContestantID(_id);
+		
+		assertEquals("ID doesn't match"
+						, _id
+						, _ra.getContestantID());
+	}
+	
+	/**
+	 * RaceParticipant: Wrapper to test the (abstract) peformRaceActivity() method.
+	 */
+	public void testPerformRaceActivity(String expectedActivityName)
+	{
+		assertEquals("Race activity doesn't match"
+						, expectedActivityName
+						, _ra.performRaceActivity());
+	}
+	
+	/**
+	 * RaceParticipant: Test the performRaceActivity() method.
+	 * To be implemented in subclass using the wrapper.
+	 */
+	@Test
+	abstract public void testPerformRaceActivity();
+	
+	/**
+	 * Tests the RacingAthlete.toString() method.
+	 */
+	@Test
+	public void testToString()
+	{
+		// Class
+		
+		assertTrue("Does not contain class name"
+						, _ra.toString().contains(_ra.getClass().getSimpleName()));
+		
+		// Person Interface
+		
+		_ra.setName(_name);
+		_ra.setAge(_age);
+		
+		assertTrue("Does not contain name"
+						, _ra.toString().contains(_name));
+		
+		assertTrue("Does not contain age"
+						, _ra.toString().contains(Integer.toString(_age)));
+		
+		// RaceParticipant Interface
+		
+		_ra.setContestantID(_id);
+		
+		assertTrue("Does not contain ID"
+						, _ra.toString().contains(Integer.toString(_id)));
 	}
 }

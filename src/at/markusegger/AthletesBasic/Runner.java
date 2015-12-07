@@ -4,8 +4,9 @@
 package at.markusegger.AthletesBasic;
 
 /**
- * @author MarkusME
  * Runner is one type of athlete.
+ * 
+ * @author MarkusME
  */
 public class Runner extends RacingAthlete
 {
@@ -24,14 +25,13 @@ public class Runner extends RacingAthlete
 	 * 
 	 * @param contestantID		The contestant ID.
 	 * @param name				The name of the athlete.
+	 * @param age				The age of the athlete.
 	 * @param shoeBrand			The brand of shoes used by the athlete.
 	 */
-	public Runner(int contestantID, String name, String shoeBrand)
+	public Runner(int contestantID, String name, int age, String shoeBrand)
 	{
-		super();
+		super(contestantID, name, age);
 		
-		setContestantID(contestantID);
-		setName(name);
 		setShoeBrand(shoeBrand);
 	}
 	
@@ -61,5 +61,13 @@ public class Runner extends RacingAthlete
 	public void setShoeBrand(String newShoeBrand)
 	{
 		_shoeBrand = newShoeBrand;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return String.format("%s Using shoes: %s"
+								, super.toString()
+								, _shoeBrand);
 	}
 }
