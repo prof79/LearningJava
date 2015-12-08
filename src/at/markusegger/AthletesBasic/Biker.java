@@ -20,6 +20,18 @@ public class Biker extends RacingAthlete
 		super();
 	}
 	
+	/**
+	 * Parameterized constructor.
+	 * 
+	 * @param name				Athlete's name
+	 * @param age				Athlete's age
+	 * @param contestantID		Athlete's ID
+	 */
+	public Biker(String name, int age, int contestantID)
+	{
+		super(name, age, contestantID);
+	}
+	
 	/* (non-Javadoc)
 	 * @see at.markusegger.AthletesBasic.RaceParticipant#performRaceActivity()
 	 */
@@ -57,7 +69,7 @@ public class Biker extends RacingAthlete
 	@Override
 	public String toString()
 	{		
-		return String.format("%s Using clips? %b"
+		return String.format("%s using clips: %b"
 								, super.toString()
 								, getUsingClips());
 	}	

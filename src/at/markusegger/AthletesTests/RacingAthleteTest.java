@@ -19,17 +19,31 @@ import at.markusegger.AthletesBasic.*;
 abstract public class RacingAthleteTest
 {
 	// Tested Class
-	private RacingAthlete _ra;
+	private RacingAthlete defaultAthlete;
+	private RacingAthlete specificAthlete;
 	
 	// Person
+	private String _defaultName = "Tony";
+	private int _defaultAge = 39;
 	protected String _name = "Hugo";
 	protected int _age = 97;
 	
 	// RaceParticipant
+	private int _defaultID = 830111309;
 	protected int _id = 4711839;
 	
 	abstract protected RacingAthlete getDefaultRacingAthlete();
 	abstract protected RacingAthlete getSpecificRacingAthlete();
+	
+	/**
+	 * Default parameterless constructor.
+	 */
+	public RacingAthleteTest()
+	{
+		defaultAthlete = getDefaultRacingAthlete();
+		
+		specificAthlete = getSpecificRacingAthlete();
+	}
 	
 	/**
 	 * Initial set-up before each test.
@@ -39,7 +53,6 @@ abstract public class RacingAthleteTest
 	@Before
 	public void setUp() throws Exception
 	{
-		_ra = getDefaultRacingAthlete();
 	}
 	
 	/**
@@ -50,7 +63,6 @@ abstract public class RacingAthleteTest
 	@After
 	public void tearDown() throws Exception
 	{
-		_ra = null;
 	}
 	
 	/**
@@ -59,7 +71,22 @@ abstract public class RacingAthleteTest
 	@Test
 	public void testConstructors()
 	{
-		assertNotNull("Default RacingAthlete is null", _ra);
+		assertNotNull("Default RacingAthlete is null", defaultAthlete);
+		
+		assertEquals("Specific RacingAthlete: Name not matching"
+						, _name
+						, specificAthlete.getName()
+						);
+		
+		assertEquals("Specific RacingAthlete: Age not matching"
+						, _age
+						, specificAthlete.getAge()
+						);
+		
+		assertEquals("Specific RacingAthlete: Contestant ID not matching"
+						, _id
+						, specificAthlete.getContestantID()
+						);
 	}
 		
 	/**
@@ -68,11 +95,12 @@ abstract public class RacingAthleteTest
 	@Test
 	public void testSetGetName()
 	{
-		_ra.setName(_name);
+		defaultAthlete.setName(_defaultName);
 		
-		assertEquals("Name is not equal"
-						, _name
-						, _ra.getName());
+		assertEquals("Name is not set properly"
+						, _defaultName
+						, defaultAthlete.getName()
+						);
 	}
 	
 	/** Person: Test the age setter/getter.
@@ -81,11 +109,12 @@ abstract public class RacingAthleteTest
 	@Test
 	public void testSetGetAge()
 	{
-		_ra.setAge(_age);
+		defaultAthlete.setAge(_defaultAge);
 		
-		assertEquals("Age is not equal"
-						, _age
-						, _ra.getAge());
+		assertEquals("Age is not set properly"
+						, _defaultAge
+						, defaultAthlete.getAge()
+						);
 	}
 	
 	/**
@@ -94,11 +123,12 @@ abstract public class RacingAthleteTest
 	@Test
 	public void testSetGetContestantID()
 	{
-		_ra.setContestantID(_id);
+		defaultAthlete.setContestantID(_defaultID);
 		
-		assertEquals("ID doesn't match"
-						, _id
-						, _ra.getContestantID());
+		assertEquals("ID is not set properly"
+						, _defaultID
+						, defaultAthlete.getContestantID()
+						);
 	}
 	
 	/**
@@ -106,9 +136,10 @@ abstract public class RacingAthleteTest
 	 */
 	public void testPerformRaceActivity(String expectedActivityName)
 	{
-		assertEquals("Race activity doesn't match"
+		assertEquals("Race activity is not set properly"
 						, expectedActivityName
-						, _ra.performRaceActivity());
+						, defaultAthlete.performRaceActivity()
+						);
 	}
 	
 	/**
@@ -124,27 +155,34 @@ abstract public class RacingAthleteTest
 	@Test
 	public void testToString()
 	{
+		// Preparations
+		
+		defaultAthlete.setName(_defaultName);
+		defaultAthlete.setAge(_defaultAge);
+		
+		defaultAthlete.setContestantID(_defaultID);
+		
+		String athleteString = defaultAthlete.toString();
+		
 		// Class
 		
 		assertTrue("Does not contain class name"
-						, _ra.toString().contains(_ra.getClass().getSimpleName()));
+						, athleteString.contains(defaultAthlete.getClass().getSimpleName())
+						);
 		
 		// Person Interface
-		
-		_ra.setName(_name);
-		_ra.setAge(_age);
-		
+				
 		assertTrue("Does not contain name"
-						, _ra.toString().contains(_name));
+						, athleteString.contains(_defaultName));
 		
 		assertTrue("Does not contain age"
-						, _ra.toString().contains(Integer.toString(_age)));
+						, athleteString.contains(Integer.toString(_defaultAge))
+						);
 		
 		// RaceParticipant Interface
-		
-		_ra.setContestantID(_id);
-		
+				
 		assertTrue("Does not contain ID"
-						, _ra.toString().contains(Integer.toString(_id)));
+						, athleteString.contains(Integer.toString(_defaultID))
+						);
 	}
 }

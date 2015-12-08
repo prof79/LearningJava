@@ -24,7 +24,7 @@ public class AthletesDriver
 		runner1.setName("Tom");
 		runner1.setAge(38);
 		
-		Runner runner2 = new Runner(2972003, "Hilda", 47, "Naykey");
+		Runner runner2 = new Runner("Hilda", 47, 2972003, "Naykey");
 		
 		Swimmer swimmer1 = new Swimmer();
 		

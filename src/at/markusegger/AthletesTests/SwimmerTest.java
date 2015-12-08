@@ -21,7 +21,7 @@ public class SwimmerTest extends RacingAthleteTest
 {
 	Swimmer swimmer1;
 	
-	String activity = "Swimming";
+	String _activity = "Swimming";
 	
 	/**
 	 * @throws java.lang.Exception
@@ -29,8 +29,6 @@ public class SwimmerTest extends RacingAthleteTest
 	@Before
 	public void setUp() throws Exception
 	{
-		super.setUp();
-		
 		swimmer1 = (Swimmer) getDefaultRacingAthlete();
 	}
 
@@ -41,8 +39,6 @@ public class SwimmerTest extends RacingAthleteTest
 	public void tearDown() throws Exception
 	{
 		swimmer1 = null;
-		
-		super.tearDown();
 	}
 
 	/**
@@ -60,7 +56,7 @@ public class SwimmerTest extends RacingAthleteTest
 	@Override
 	public void testPerformRaceActivity()
 	{
-		super.testPerformRaceActivity(activity);		
+		super.testPerformRaceActivity(_activity);		
 	}
 	
 	@Test
@@ -69,7 +65,7 @@ public class SwimmerTest extends RacingAthleteTest
 		super.testToString();
 				
 		assertTrue("Activity not contained in string"
-						, swimmer1.toString().contains(activity));
+						, swimmer1.toString().contains(_activity));
 	}
 
 	@Override
@@ -81,6 +77,6 @@ public class SwimmerTest extends RacingAthleteTest
 	@Override
 	protected RacingAthlete getSpecificRacingAthlete()
 	{
-		return new Swimmer();
+		return new Swimmer(_name, _age, _id);
 	}
 }

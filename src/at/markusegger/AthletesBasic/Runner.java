@@ -28,9 +28,9 @@ public class Runner extends RacingAthlete
 	 * @param age				The age of the athlete.
 	 * @param shoeBrand			The brand of shoes used by the athlete.
 	 */
-	public Runner(int contestantID, String name, int age, String shoeBrand)
+	public Runner(String name, int age, int contestantID, String shoeBrand)
 	{
-		super(contestantID, name, age);
+		super(name, age, contestantID);
 		
 		setShoeBrand(shoeBrand);
 	}
@@ -66,8 +66,11 @@ public class Runner extends RacingAthlete
 	@Override
 	public String toString()
 	{
-		return String.format("%s Using shoes: %s"
-								, super.toString()
-								, _shoeBrand);
+		// Shoes should only be mentioned when set.
+		return getShoeBrand() == null
+					? super.toString()
+					: String.format("%s using shoes: %s"
+									, super.toString()
+									, _shoeBrand);
 	}
 }

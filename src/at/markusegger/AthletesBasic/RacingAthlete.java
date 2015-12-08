@@ -15,7 +15,7 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 	int _age;
 	
 	int _contestantID;
-	
+		
 	/**
 	 * Default parameterless constructor.
 	 */
@@ -30,7 +30,7 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 	 * @param name				The name of the athlete.
 	 * @param age				The age of the athlete.
 	 */
-	public RacingAthlete(int contestantID, String name, int age)
+	public RacingAthlete(String name, int age, int contestantID)
 	{
 		// Person
 		_name = name;
@@ -103,12 +103,12 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 	@Override
 	public String toString()
 	{
-		return String.format("%s: %s, %d, is %s and has ID %d."
+		return String.format("%-10s] Name: %-10s Age: %3d ID: %10d Discipline: %s"
 								, getClass().getSimpleName()
 								, getName()
 								, getAge()
-								, performRaceActivity()
 								, getContestantID()
+								, performRaceActivity()
 								);
 	}
 }

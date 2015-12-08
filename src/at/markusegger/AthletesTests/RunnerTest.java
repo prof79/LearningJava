@@ -18,9 +18,9 @@ public class RunnerTest extends RacingAthleteTest
 {
 	Runner runner1;
 
-	String activity = "Running";
+	String _activity = "Running";
 	
-	String shoes = "New Balance";
+	String _shoes = "New Balance";
 	
 	/**
 	 * Setup for each test case.
@@ -30,8 +30,6 @@ public class RunnerTest extends RacingAthleteTest
 	@Before
 	public void setUp() throws Exception
 	{
-		super.setUp();
-		
 		runner1 = new Runner();
 	}
 
@@ -44,8 +42,6 @@ public class RunnerTest extends RacingAthleteTest
 	public void tearDown() throws Exception
 	{
 		runner1 = null;
-		
-		super.tearDown();
 	}
 	
 	/**
@@ -73,7 +69,7 @@ public class RunnerTest extends RacingAthleteTest
 						, specificRunner.getContestantID());
 		
 		assertEquals("Specific Runner constructor: shoeBrand"
-						, shoes
+						, _shoes
 						, specificRunner.getShoeBrand());
 	}
 	
@@ -83,7 +79,7 @@ public class RunnerTest extends RacingAthleteTest
 	@Override
 	public void testPerformRaceActivity()
 	{
-		super.testPerformRaceActivity(activity);		
+		super.testPerformRaceActivity(_activity);		
 	}
 	
 	@Test
@@ -91,13 +87,13 @@ public class RunnerTest extends RacingAthleteTest
 	{
 		super.testToString();
 		
-		runner1.setShoeBrand(shoes);
+		runner1.setShoeBrand(_shoes);
 				
 		assertTrue("Activity not found in string"
-						, runner1.toString().contains(activity));
+						, runner1.toString().contains(_activity));
 		
 		assertTrue("Shoes not found in string"
-						, runner1.toString().contains(shoes));
+						, runner1.toString().contains(_shoes));
 	}
 
 	@Override
@@ -109,6 +105,6 @@ public class RunnerTest extends RacingAthleteTest
 	@Override
 	protected RacingAthlete getSpecificRacingAthlete()
 	{
-		return new Runner(_id, _name, _age, shoes);
+		return new Runner(_name, _age, _id, _shoes);
 	}
 }

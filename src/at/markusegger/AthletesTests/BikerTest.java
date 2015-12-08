@@ -105,6 +105,6 @@ public class BikerTest extends RacingAthleteTest
 	@Override
 	protected RacingAthlete getSpecificRacingAthlete()
 	{
-		return new Biker();
+		return new Biker(_name, _age, _id);
 	}
 }

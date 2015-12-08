@@ -18,7 +18,19 @@ public class Swimmer extends RacingAthlete
 	{
 		super();
 	}
-
+	
+	/**
+	 * Parameterized constructor.
+	 * 
+	 * @param name				Athlete's name
+	 * @param age				Athlete's age
+	 * @param contestantID		Athlete's ID
+	 */
+	public Swimmer(String name, int age, int contestantID)
+	{
+		super(name, age, contestantID);
+	}
+	
 	/** (non-Javadoc)
 	 * @see at.markusegger.AthletesBasic.RaceParticipant#performRaceActivity()
 	 */
