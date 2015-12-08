@@ -12,16 +12,16 @@ import at.markusegger.RaceManagerObjects.*;
  * This is the main part and console GUI for the race manager.
  * 
  * @author MarkusME
- * @version 0.1
+ * @version 1.0
  */
 public class Program
 {
-	static final int lineWidth = 80;
-	static final String stars = Utilities.repeatStar(lineWidth);
-	static final String title = "Markus' Java Race Manager";
-	static final Scanner scanner = new Scanner(System.in);
-	static boolean quitFlag = false;
-	static MyRaceManager raceManager;
+	static final private int lineWidth = 80;
+	static final private String stars = Utilities.repeatStar(lineWidth);
+	static final private String title = "Markus' Java Race Manager";
+	static final private Scanner scanner = new Scanner(System.in);
+	static private boolean quitFlag = false;
+	static private MyRaceManager raceManager;
 	
 	/**
 	 * This is the main entry point for the race manager application.
@@ -45,7 +45,7 @@ public class Program
 	 * 
 	 * @return The choice of the user as an integer
 	 */
-	static int getInput()
+	static private int getInput()
 	{
 		return Utilities.readIntFromKeyboard("Your choice: ", 1, 8);
 	}
@@ -53,7 +53,7 @@ public class Program
 	/**
 	 * Prints the application's title.
 	 */
-	static void printHeader()
+	static private void printHeader()
 	{
 		System.out.println(stars);
 		
@@ -65,7 +65,7 @@ public class Program
 	 * 
 	 * @param caption	The sub-header's name
 	 */
-	static void printSubheader(String caption)
+	static private void printSubheader(String caption)
 	{
 		System.out.println(stars);
 		System.out.println(caption.trim().toUpperCase());
@@ -76,7 +76,7 @@ public class Program
 	/**
 	 * Print the application menu/available choices.
 	 */
-	static void printMenu()
+	static private void printMenu()
 	{
 		System.out.println(stars);
 		System.out.println("Enter 1 to create a new race");
@@ -95,7 +95,7 @@ public class Program
 	 * 
 	 * @param choice		The number of the menu item chosen
 	 */
-	static void handleInput(int choice)
+	static private void handleInput(int choice)
 	{
 		System.out.println();
 		

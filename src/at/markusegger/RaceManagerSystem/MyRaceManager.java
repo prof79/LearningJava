@@ -14,7 +14,7 @@ import at.markusegger.Utilities.Utilities;
  * This class manages a named event in a certain location and its participants.
  * 
  * @author MarkusME
- * @version 0.1
+ * @version 1.0
  */
 public class MyRaceManager implements Race
 {
@@ -24,7 +24,7 @@ public class MyRaceManager implements Race
 	private Random _rand;
 	private int _nextID;
 	
-	ArrayList<RacingAthlete> _athletes;
+	private ArrayList<RacingAthlete> _athletes;
 	
 	/**
 	 * Default parameterless constructor.
