@@ -19,10 +19,10 @@ public final class UtilitiesDriver
 	public static void main(String[] args)
 	{
 		System.out.println(String.format("X equals Y? %b"
-											, Utilities.nullSafeCompare("X", "Y")));
+											, Utilities.nullSafeEquals("X", "Y")));
 
 		System.out.println(String.format("X equals X? %b"
-											, Utilities.nullSafeCompare("X", "X")));
+											, Utilities.nullSafeEquals("X", "X")));
 
 	}
 }
