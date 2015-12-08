@@ -11,11 +11,12 @@ package at.markusegger.RaceManagerObjects;
  */
 abstract public class RacingAthlete implements Person, RaceParticipant
 {
-	String _name;
-	int _age;
+	// Person
+	private String _name;
+	private int _age;
+	// RaceParticipant
+	private int _contestantID;
 	
-	int _contestantID;
-		
 	/**
 	 * Default parameterless constructor.
 	 */

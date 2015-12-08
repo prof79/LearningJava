@@ -9,18 +9,16 @@ import org.junit.Test;
 import at.markusegger.RaceManagerObjects.*;
 
 /**
- * Tests for the Runner class.
+ * Tests for the Biker class.
  * 
  * @author MarkusME
  *
  */
 public class BikerTest extends RacingAthleteTest
 {
-	Biker biker1;
-	
-	String activity = "Biking";
-	
-	boolean usingClips = true;
+	private Biker biker1;
+	private String activity = "Biking";
+	private boolean usingClips = true;
 	
 	/**
 	 * Set-up before each test case.

@@ -10,7 +10,7 @@ package at.markusegger.RaceManagerObjects;
  */
 public class Runner extends RacingAthlete
 {
-	String _shoeBrand;
+	private String _shoeBrand;
 	
 	/**
 	 * Default parameterless constructor.

@@ -13,15 +13,15 @@ import at.markusegger.RaceManagerObjects.RacingAthlete;
 import at.markusegger.RaceManagerObjects.Swimmer;
 
 /**
+ * Test cases for the Swimmer class.
+ * 
  * @author MarkusME
- *
- * Test cases for the Swimmer class. 
+ * 
  */
 public class SwimmerTest extends RacingAthleteTest
 {
-	Swimmer swimmer1;
-	
-	String _activity = "Swimming";
+	private Swimmer swimmer1;
+	private String _activity = "Swimming";
 	
 	/**
 	 * @throws java.lang.Exception

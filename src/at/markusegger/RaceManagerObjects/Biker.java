@@ -10,7 +10,7 @@ package at.markusegger.RaceManagerObjects;
  */
 public class Biker extends RacingAthlete
 {
-	boolean _usingClips;
+	private boolean _usingClips;
 	
 	/**
 	 * Parameterless constructor

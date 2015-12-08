@@ -16,11 +16,9 @@ import at.markusegger.RaceManagerObjects.*;
  */
 public class RunnerTest extends RacingAthleteTest
 {
-	Runner runner1;
-
-	String _activity = "Running";
-	
-	String _shoes = "New Balance";
+	private Runner runner1;
+	private String _activity = "Running";
+	private String _shoes = "New Balance";
 	
 	/**
 	 * Setup for each test case.
