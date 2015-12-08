@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.markusegger.AthletesTests;
+package at.markusegger.RaceManagerTests;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import at.markusegger.AthletesBasic.RacingAthlete;
-import at.markusegger.AthletesBasic.Swimmer;
+import at.markusegger.RaceManagerObjects.RacingAthlete;
+import at.markusegger.RaceManagerObjects.Swimmer;
 
 /**
  * @author MarkusME

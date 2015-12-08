@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.markusegger.AthletesBasic;
+package at.markusegger.RaceManagerObjects;
 
 /**
  * Interface specifying a person through name and age.

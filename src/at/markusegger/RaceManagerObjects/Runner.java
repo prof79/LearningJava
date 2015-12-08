@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.markusegger.AthletesBasic;
+package at.markusegger.RaceManagerObjects;
 
 /**
  * Runner is one type of athlete.
@@ -36,7 +36,7 @@ public class Runner extends RacingAthlete
 	}
 	
 	/** (non-Javadoc)
-	 * @see at.markusegger.AthletesBasic.RaceParticipant#performRaceActivity()
+	 * @see at.markusegger.RaceManagerObjects.RaceParticipant#performRaceActivity()
 	 */
 	public String performRaceActivity()
 	{

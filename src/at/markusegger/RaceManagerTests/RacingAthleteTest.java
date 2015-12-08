@@ -1,14 +1,14 @@
 /**
  * 
  */
-package at.markusegger.AthletesTests;
+package at.markusegger.RaceManagerTests;
 
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import at.markusegger.AthletesBasic.*;
+import at.markusegger.RaceManagerObjects.*;
 
 /**
  * Tests the RacingAthlete class.

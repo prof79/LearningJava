@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.markusegger.AthletesBasic;
+package at.markusegger.RaceManagerObjects;
 
 /**
  * Swimmer is another type of athlete.
@@ -32,7 +32,7 @@ public class Swimmer extends RacingAthlete
 	}
 	
 	/** (non-Javadoc)
-	 * @see at.markusegger.AthletesBasic.RaceParticipant#performRaceActivity()
+	 * @see at.markusegger.RaceManagerObjects.RaceParticipant#performRaceActivity()
 	 */
 	public String performRaceActivity()
 	{	

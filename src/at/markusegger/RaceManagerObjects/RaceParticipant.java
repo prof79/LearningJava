@@ -1,7 +1,7 @@
 /**
  * 
  */
-package at.markusegger.AthletesBasic;
+package at.markusegger.RaceManagerObjects;
 
 /**
  * @author MarkusME
