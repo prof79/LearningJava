@@ -3,6 +3,8 @@
  */
 package at.markusegger.Utilities;
 
+import java.util.Scanner;
+
 /**
  * @author MarkusME
  *
@@ -124,6 +126,26 @@ final public class Utilities
 	
 	/**
 	 * Validates that a number falls into a certain range.
+	 * 
+	 * @param value				The numeric value to check
+	 * @param minimumValue		The allowed minimum (inclusive)
+	 * @param maxValue			The allowed maximum (inclusive)
+	 * 
+	 * @throws IndexOutOfBoundException
+	 */
+	static public void validateNumberInRange(double value, double minValue, double maxValue)
+		throws IndexOutOfBoundsException
+	{
+		if (value < minValue || value > maxValue)
+		{
+			String message = String.format("%f is not between %f and %f (inclusive)", value, minValue, maxValue);
+			
+			throw new IndexOutOfBoundsException(message);
+		}
+	}
+	
+	/**
+	 * Validates that a number falls into a certain range.
 	 * This shorthand version only checks the lower bound.
 	 * 
 	 * @param value				The numeric value to check
@@ -135,5 +157,114 @@ final public class Utilities
 		throws IndexOutOfBoundsException
 	{
 		validateNumberInRange(value,  minValue, Integer.MAX_VALUE);
+	}
+	
+	/**
+	 * Validates that a number falls into a certain range.
+	 * This shorthand version only checks the lower bound.
+	 * 
+	 * @param value				The numeric value to check
+	 * @param minimumValue		The allowed minimum (inclusive)
+	 * 
+	 * @throws IndexOutOfBoundException
+	 */
+	static public void validateNumberInRange(double value, double minValue)
+		throws IndexOutOfBoundsException
+	{
+		validateNumberInRange(value,  minValue, Double.MAX_VALUE);
+	}
+	
+	/**
+	 * Retrieves an integer from keyboard.
+	 * Input is limited to a certain range (inclusive). You may use
+	 * Integer.MIN_VALUE and Integer.MAX_VALUE as arguments.
+	 * 
+	 * @param prompt	The input prompt message or null. The prompt will print without a newline (System.out.print())
+	 * @param minValue	The minimum integer value (inclusive)
+	 * @param maxValue	The maximum integer value (inclusive)
+	 * @return The user's choice as an integer
+	 */
+	static public int readIntFromKeyboard(String prompt, int minValue, int maxValue)
+	{
+		final Scanner scanner = new Scanner(System.in);
+		
+		int choice = -1;
+		boolean invalidInput = true;
+		
+		while (invalidInput)
+		{
+			if (prompt != null && !prompt.isEmpty())
+			{
+				System.out.print(prompt);
+			}
+			
+			String inputLine = scanner.nextLine().trim();
+			
+			try
+			{
+				choice = Integer.parseInt(inputLine);
+				
+				Utilities.validateNumberInRange(choice, minValue, maxValue);
+				
+				invalidInput = false;
+			}
+			catch (NumberFormatException nfe)
+			{
+				System.out.println("Invalid input! Not a number: " + inputLine);
+			}
+			catch (IndexOutOfBoundsException ioobe)
+			{
+				System.out.println("Invalid input! " + ioobe.getMessage());
+			}
+		}
+		
+		return choice;
+	}
+	
+	/**
+	 * Retrieves a double from keyboard.
+	 * Input is limited to a certain range (inclusive). You may use
+	 * Double.MIN_VALUE and Double.MAX_VALUE as arguments.
+	 * 
+	 * @param prompt	The input prompt message or null. The prompt will print without a newline (System.out.print())
+	 * @param minValue	The minimum double value (inclusive)
+	 * @param maxValue	The maximum double value (inclusive)
+	 * @return The user's choice as a double
+	 */
+	static public double readDoubleFromKeyboard(String prompt, double minValue, double maxValue)
+	{
+		final Scanner scanner = new Scanner(System.in);
+		
+		double choice = Double.NaN;
+		boolean invalidInput = true;
+		
+		while (invalidInput)
+		{
+			if (prompt != null && !prompt.isEmpty())
+			{
+				System.out.print(prompt);
+			}
+			
+			String inputLine = scanner.nextLine().trim();
+			
+			try
+			{
+				choice = Double.parseDouble(inputLine);
+				
+				Utilities.validateNumberInRange(choice, minValue, maxValue);
+				
+				invalidInput = false;
+			}
+			catch (NumberFormatException nfe)
+			{
+				System.out.println("Invalid input! Not a number: " + inputLine);
+			}
+			catch (IndexOutOfBoundsException ioobe)
+			{
+				System.out.println("Invalid input! " + ioobe.getMessage());
+			}
+		}
+		
+		return choice;
 	}
 }

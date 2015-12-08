@@ -210,11 +210,13 @@ public class UtilitiesTest
 				);
 	}
 	
+	// **************************************************************************************
+	
 	/**
 	 * Test the validateNumberInRange() methods.
 	 */
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void testValidateNumberInRange_ThrowsOnLower_2arg()
+	public void testValidateNumberInRange_Int_ThrowsOnLower_2arg()
 	{
 		Utilities.validateNumberInRange(7, 10, 3728);
 	}
@@ -223,7 +225,7 @@ public class UtilitiesTest
 	 * Test the validateNumberInRange() methods.
 	 */
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void testValidateNumberInRange_ThrowsOnLower_1arg()
+	public void testValidateNumberInRange_Int_ThrowsOnLower_1arg()
 	{
 		Utilities.validateNumberInRange(-5, 12);
 	}
@@ -232,7 +234,7 @@ public class UtilitiesTest
 	 * Test the validateNumberInRange() methods.
 	 */
 	@Test(expected = IndexOutOfBoundsException.class)
-	public void testValidateNumberInRange_ThrowsOnHigher()
+	public void testValidateNumberInRange_Int_ThrowsOnHigher()
 	{
 		Utilities.validateNumberInRange(4727, 11, 3728);
 	}
@@ -241,8 +243,82 @@ public class UtilitiesTest
 	 * Test the validateNumberInRange() methods.
 	 */
 	@Test
-	public void testValidateNumberInRange_DoesntThrowInRange()
+	public void testValidateNumberInRange_Int_DoesntThrowInRange()
 	{
 		Utilities.validateNumberInRange(2845, 9, 3618);
+	}
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test
+	public void testValidateNumberInRange_Int_DoesntThrowOnMIN_VALUE()
+	{
+		Utilities.validateNumberInRange(Integer.MIN_VALUE, Integer.MIN_VALUE, 3618);
+	}
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test
+	public void testValidateNumberInRange_Int_DoesntThrowOnMAX_VALUE()
+	{
+		Utilities.validateNumberInRange(Integer.MAX_VALUE, 9, Integer.MAX_VALUE);
+	}
+	
+	// **************************************************************************************
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testValidateNumberInRange_Dbl_ThrowsOnLower_2arg()
+	{
+		Utilities.validateNumberInRange(7.0, 10.0, 3728.0);
+	}
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testValidateNumberInRange_Dbl_ThrowsOnLower_1arg()
+	{
+		Utilities.validateNumberInRange(-5.01, 12.17);
+	}
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testValidateNumberInRange_Dbl_ThrowsOnHigher()
+	{
+		Utilities.validateNumberInRange(4727.713, 11.7, 3728.91);
+	}
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test
+	public void testValidateNumberInRange_Dbl_DoesntThrowInRange()
+	{
+		Utilities.validateNumberInRange(2845.01, 2845.0, 2845.02);
+	}
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test
+	public void testValidateNumberInRange_Dbl_DoesntThrowOnMIN_VALUE()
+	{
+		Utilities.validateNumberInRange(Double.MIN_VALUE, Double.MIN_VALUE, 3618.0);
+	}
+	
+	/**
+	 * Test the validateNumberInRange() methods.
+	 */
+	@Test
+	public void testValidateNumberInRange_Dbl_DoesntThrowOnMAX_VALUE()
+	{
+		Utilities.validateNumberInRange(Double.MAX_VALUE, 9.0, Double.MAX_VALUE);
 	}
 }
