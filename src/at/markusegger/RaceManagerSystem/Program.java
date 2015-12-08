@@ -168,7 +168,7 @@ public class Program
 		System.out.print("Event location: ");
 		eventLocation = scanner.nextLine().trim();
 		
-		raceDistance = Utilities.readDoubleFromKeyboard("Race distance: ", Double.MIN_VALUE, Double.MAX_VALUE); 
+		raceDistance = Utilities.readDoubleFromKeyboard("Race distance (km): ", Double.MIN_VALUE, Double.MAX_VALUE); 
 		
 		raceManager.setName(eventName);
 		raceManager.setLocation(eventLocation);
