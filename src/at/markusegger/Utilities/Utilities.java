@@ -6,11 +6,11 @@ package at.markusegger.Utilities;
 import java.util.Scanner;
 
 /**
- * @author MarkusME
- *
  * A collection of several utilities.
  * TODO: DRY code smell, generics possible?
  * 
+ * @author MarkusME
+ * @version 0.7 
  */
 final public class Utilities
 {
