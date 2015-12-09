@@ -13,7 +13,7 @@ import org.junit.Test;
  * Tests the methods of the Utilities class.
  * 
  * @author MarkusME
- * @version 0.1
+ * @version 0.2
  */
 public class UtilitiesTest
 {
@@ -320,5 +320,25 @@ public class UtilitiesTest
 	public void testValidateNumberInRange_Dbl_DoesntThrowOnMAX_VALUE()
 	{
 		Utilities.validateNumberInRange(Double.MAX_VALUE, 9.0, Double.MAX_VALUE);
+	}
+	
+	/**
+	 * Test the validateStringNotNullOrEmpty() method.
+	 * Case 1: Throws on string is null.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidateStringNotNullOrEmpty_Throws_OnNull()
+	{
+		Utilities.validateStringNotNullOrEmpty(null);
+	}
+	
+	/**
+	 * Test the validateStringNotNullOrEmpty() method.
+	 * Case 2: Throws on empty string.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testValidateStringNotNullOrEmpty_Throws_OnEmpty()
+	{
+		Utilities.validateStringNotNullOrEmpty("");
 	}
 }

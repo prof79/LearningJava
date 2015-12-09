@@ -36,6 +36,11 @@ public class Swimmer extends RacingAthlete
 	 */
 	public String performRaceActivity()
 	{	
+		if (getIsInjured())
+		{
+			throw new AthleteInjuredException();
+		}
+		
 		return "Swimming";
 	}
 }

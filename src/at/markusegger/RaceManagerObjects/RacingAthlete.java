@@ -3,6 +3,8 @@
  */
 package at.markusegger.RaceManagerObjects;
 
+import at.markusegger.Utilities.Utilities;
+
 /**
  * This is the racing athlete base class.
  * 
@@ -16,6 +18,8 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 	private int _age;
 	// RaceParticipant
 	private int _contestantID;
+	// Handle injuries
+	private boolean _isInjured;
 	
 	/**
 	 * Default parameterless constructor.
@@ -57,7 +61,10 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 	 * @param newName	The athlete's name.
 	 */
 	public void setName(String newName)
+		throws IllegalArgumentException
 	{
+		Utilities.validateStringNotNullOrEmpty(newName);
+		
 		_name = newName;
 	}
 	
@@ -77,7 +84,10 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 	 * @param newAge	The athlete's age.
 	 */
 	public void setAge(int newAge)
+		throws IndexOutOfBoundsException
 	{
+		Utilities.validateNumberInRange(newAge, 0, 300);
+		
 		_age = newAge;
 	}
 	
@@ -98,13 +108,35 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 	 */
 	public void setContestantID(int newContestantID)
 	{
+		Utilities.validateNumberInRange(newContestantID, 1, 100000);
+		
 		_contestantID = newContestantID;
+	}
+	
+	/**
+	 * Gets the injury status.
+	 * 
+	 * @return True if injured otherwise false
+	 */
+	public boolean getIsInjured()
+	{
+		return _isInjured;
+	}
+	
+	/**
+	 * Sets the injury status of the athlete.
+	 * 
+	 * @param isInjured		Is the athlete injured?
+	 */
+	public void setIsInjured(boolean isInjured)
+	{
+		_isInjured = isInjured;
 	}
 	
 	@Override
 	public String toString()
 	{
-		return String.format("%-10s] Name: %-10s Age: %3d ID: %10d Discipline: %s"
+		return String.format("%-10s] Name: %-10s Age: %3d ID: %6d Discipline: %s"
 								, getClass().getSimpleName()
 								, getName()
 								, getAge()

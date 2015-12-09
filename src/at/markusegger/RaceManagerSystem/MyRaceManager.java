@@ -18,6 +18,8 @@ import at.markusegger.Utilities.Utilities;
  */
 public class MyRaceManager implements Race
 {
+	static final private int MAX_ID = 100000;
+	
 	private String _raceName;
 	private double _raceDistance;
 	private String _raceLocation;
@@ -33,7 +35,8 @@ public class MyRaceManager implements Race
 	{
 		_rand = new Random();
 		
-		_nextID = _rand.nextInt(999999);
+		_nextID = _rand.nextInt(MAX_ID) + 1;
+		//_nextID = 99998;
 		
 		_athletes = new ArrayList<RacingAthlete>();
 	}
@@ -105,7 +108,14 @@ public class MyRaceManager implements Race
 		}
 		
 		// We mustn't forget the contestant ID.
-		athlete.setContestantID(_nextID++);
+		athlete.setContestantID(_nextID);
+		
+		_nextID = ++_nextID % MAX_ID;
+		
+		if (_nextID == 0)
+		{
+			++_nextID;
+		}
 		
 		return _athletes.add(athlete);
 	}

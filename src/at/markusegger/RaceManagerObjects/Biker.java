@@ -38,6 +38,11 @@ public class Biker extends RacingAthlete
 	@Override
 	public String performRaceActivity()
 	{
+		if (getIsInjured())
+		{
+			throw new AthleteInjuredException("The biker crashed their bike.");
+		}
+		
 		return "Biking";
 	}
 		

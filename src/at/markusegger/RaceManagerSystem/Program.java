@@ -232,10 +232,14 @@ public class Program
 			}
 		}
 		
-		System.out.print("What is the name of the athlete? ");
-		name = scanner.nextLine().trim();
+		do
+		{
+			System.out.print("What is the name of the athlete? ");
+			name = scanner.nextLine().trim();
+		}
+		while (name.isEmpty());
 		
-		age = Utilities.readIntFromKeyboard("How old is the athlete? ", 1, Integer.MAX_VALUE);
+		age = Utilities.readIntFromKeyboard("How old is the athlete? ", 1, 300);
 		
 		if (athlete == null)
 		{

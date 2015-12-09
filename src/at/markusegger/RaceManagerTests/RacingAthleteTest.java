@@ -29,8 +29,8 @@ abstract public class RacingAthleteTest
 	protected int _age = 97;
 	
 	// RaceParticipant
-	private int _defaultID = 830111309;
-	protected int _id = 4711839;
+	private int _defaultID = 83019;
+	protected int _id = 47179;
 	
 	abstract protected RacingAthlete getDefaultRacingAthlete();
 	abstract protected RacingAthlete getSpecificRacingAthlete();
@@ -103,8 +103,26 @@ abstract public class RacingAthleteTest
 						);
 	}
 	
-	/** Person: Test the age setter/getter.
-	 * 
+	/**
+	 * Person: Test that name throws on null.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetName_Throws_OnNull()
+	{
+		defaultAthlete.setName(null);
+	}
+	
+	/**
+	 * Person: Test that name throws on empty string.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetName_Throws_OnEmpty()
+	{
+		defaultAthlete.setName("");
+	}
+	
+	/**
+	 * Person: Test the age setter/getter.
 	 */
 	@Test
 	public void testSetGetAge()
@@ -115,6 +133,24 @@ abstract public class RacingAthleteTest
 						, _defaultAge
 						, defaultAthlete.getAge()
 						);
+	}
+	
+	/**
+	 * Person: Test that age is in sensible bounds.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testSetAge_Throws_OnTooLow()
+	{
+		defaultAthlete.setAge(-1);
+	}
+	
+	/**
+	 * Person: Test that age is in sensible bounds.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testSetAge_Throws_OnTooHigh()
+	{
+		defaultAthlete.setAge(301);
 	}
 	
 	/**
@@ -132,10 +168,33 @@ abstract public class RacingAthleteTest
 	}
 	
 	/**
+	 * RaceParticipant: Test that the contestantID remains in sensible bounds.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testSetContestantID_Throws_OnTooLow()
+	{
+		// < 1
+		defaultAthlete.setContestantID(0);
+	}
+	
+	/**
+	 * RaceParticipant: Test that the contestantID remains in sensible bounds.
+	 */
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testSetContestantID_Throws_OnTooHigh()
+	{
+		// > 100.000
+		defaultAthlete.setContestantID(100001);
+	}
+	
+	/**
 	 * RaceParticipant: Wrapper to test the (abstract) peformRaceActivity() method.
 	 */
 	public void testPerformRaceActivity(String expectedActivityName)
 	{
+		// Make sure the athlete is re-set (not injured)
+		defaultAthlete = getDefaultRacingAthlete();
+		
 		assertEquals("Race activity is not set properly"
 						, expectedActivityName
 						, defaultAthlete.performRaceActivity()
@@ -148,6 +207,34 @@ abstract public class RacingAthleteTest
 	 */
 	@Test
 	abstract public void testPerformRaceActivity();
+
+	/**
+	 * Test the injury status getter/setter
+	 */
+	@Test
+	public void testSetGetIsInjured()
+	{
+		boolean isInjured = true;
+		
+		defaultAthlete.setIsInjured(isInjured);
+		
+		assertEquals("Injury state was not set properly"
+						, isInjured
+						, defaultAthlete.getIsInjured()
+						);
+	}
+	
+	/**
+	 * Ascertain that performRaceActivity() throws an AthleteInjuredException
+	 * when injured.
+	 */
+	@Test(expected = AthleteInjuredException.class)
+	public void testPerformRaceActivity_Throws_OnInjury()
+	{
+		defaultAthlete.setIsInjured(true);
+		
+		defaultAthlete.performRaceActivity();
+	}
 	
 	/**
 	 * Tests the RacingAthlete.toString() method.
