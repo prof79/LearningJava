@@ -3,16 +3,18 @@
  */
 package at.markusegger.RaceManagerSystem;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import at.markusegger.Utilities.Utilities;
 import at.markusegger.RaceManagerObjects.*;
+import at.markusegger.RaceManagerSearch.*;
 
 /**
  * This is the main part and console GUI for the race manager.
  * 
  * @author MarkusME
- * @version 1.0
+ * @version 1.2
  */
 public class Program
 {
@@ -51,6 +53,56 @@ public class Program
 	}
 
 	/**
+	 * Let the user specify an athlete type by keyboard.
+	 * 
+	 * @return	The specific RacingAthlete class type
+	 */
+	static private Class<?> getAthleteTypeInput()
+	{
+		boolean validType = false;
+		String type;
+		Class<?> result = null;
+		
+		while (!validType)
+		{
+			System.out.print("Choose a kind of athlete: Biker, Runner, Swimmer [b, r, s]? ");
+			
+			type = scanner.nextLine().trim();
+			
+			if (!type.isEmpty())
+			{
+				char first = type.toLowerCase().charAt(0);
+				
+				switch (first)
+				{
+					case 'b':
+						// Biker selected
+						result = Biker.class;
+						validType = true;
+						break;
+						
+					case 'r':
+						// Runner selected
+						result = Runner.class;
+						validType = true;
+						break;
+						
+					case 's':
+						// Swimmer selected
+						result = Swimmer.class;
+						validType = true;
+						break;
+						
+					default:
+						break;
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Prints the application's title.
 	 */
 	static private void printHeader()
@@ -87,6 +139,18 @@ public class Program
 		System.out.println("Enter 6 to list the racers");
 		System.out.println("Enter 7 to get infos about the race");
 		System.out.println("Enter 8 to quit");
+		System.out.println(stars);
+	}
+	
+	/**
+	 * Print the find sub-menu
+	 */
+	static private void printFindMenu()
+	{
+		System.out.println(stars);
+		System.out.println("Enter 1 to search by partial name");
+		System.out.println("Enter 2 to search by contestant ID");
+		System.out.println("Enter 3 to search by athlete type");
 		System.out.println(stars);
 	}
 	
@@ -196,42 +260,21 @@ public class Program
 		
 		printSubheader("Add racer");
 		
-		while (!validType)
-		{
-			System.out.print("What kind of athlete do you want to add: Biker, Runner, Swimmer [b, r, s]? ");
-			
-			type = scanner.nextLine().trim();
-			
-			if (!type.isEmpty())
-			{
-				char first = type.toLowerCase().charAt(0);
-				
-				switch (first)
-				{
-					case 'b':
-						// Create a biker
-						athlete = new Biker();
-						validType = true;
-						break;
-						
-					case 'r':
-						// Create a runner
-						athlete = new Runner();
-						validType = true;
-						break;
-						
-					case 's':
-						// Create a swimmer
-						athlete = new Swimmer();
-						validType = true;
-						break;
-						
-					default:
-						break;
-				}
-			}
-		}
+		Class<?> classType = getAthleteTypeInput();
 		
+		try
+		{
+			athlete = (RacingAthlete) classType.newInstance();	
+		}
+		catch (InstantiationException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+				
 		do
 		{
 			System.out.print("What is the name of the athlete? ");
@@ -365,35 +408,113 @@ public class Program
 		{
 			return;
 		}
-		
-		String name;
-		RacingAthlete athlete;
-		
+
 		printSubheader("Find racer");
+
+		printFindMenu();
 		
-		System.out.print("What is the name of the racer you are looking for? ");
-		
-		name = scanner.nextLine().trim();
-		
-		athlete = raceManager.getRacer(name);
+		int choice = Utilities.readIntFromKeyboard("Your choice: ", 1, 3);
 		
 		System.out.println();
 		
-		if (athlete == null)
+		switch (choice)
 		{
-			System.out.println(
-					String.format("Sorry, athlete %s could not be found."
-							, name));
-			
+			case 1:
+				findByPartialName();
+				break;
+				
+			case 2:
+				findByContestantID();
+				break;
+				
+			case 3:
+				findByAthleteType();
+				break;
+				
+			default:
+				break;
 		}
-		else
+	}
+
+	/**
+	 * Find an athlete by type
+	 */
+	private static void findByAthleteType()
+	{
+		Class<?> classType = getAthleteTypeInput();
+		
+		AthleteFinder af = new AthleteFinderByType(classType);
+		
+		findWorker(af);
+	}
+
+	/**
+	 * Find an athlete by contestant ID
+	 */
+	private static void findByContestantID()
+	{
+		int searchedID;
+		
+		searchedID = Utilities.readIntFromKeyboard("Enter a contestant ID: "
+				, 1
+				, MyRaceManager.MAX_ID);
+		
+		AthleteFinder af = new AthleteFinderByContestantID(searchedID);
+		
+		findWorker(af);
+	}
+
+	/**
+	 * Find an athlete by partial name match
+	 */
+	private static void findByPartialName()
+	{
+		String searchPhrase;
+		
+		System.out.print("Enter a part of the name: ");
+		
+		do
 		{
-			System.out.println(athlete.toString());
+			searchPhrase = scanner.nextLine();
+		}
+		while (searchPhrase.isEmpty());
+		
+		AthleteFinder af = new AthleteFinderByPartialName(searchPhrase);
+		
+		findWorker(af);
+	}
+
+	/**
+	 * The worker method to perform a search using an AthleteFinder.
+	 * 
+	 * @param af	The AthleteFinder predicate for searching
+	 */
+	private static void findWorker(AthleteFinder af)
+	{
+		boolean atLeastOneMatch = false;
+		
+		RacingAthlete[] racers = raceManager.getRacers();
+		
+		System.out.println();
+		
+		for (RacingAthlete a : racers)
+		{
+			if (af.searchForAthlete(a))
+			{
+				atLeastOneMatch = true;
+				
+				System.out.println(a.toString());
+			}
+		}
+		
+		if (!atLeastOneMatch)
+		{
+			System.out.println("No athlete found.");
 		}
 		
 		System.out.println();
 	}
-
+	
 	/**
 	 * Get the winner of the race.
 	 */
