@@ -310,11 +310,7 @@ public class Program
 			ArrayList<RacingAthlete> athletes =
 					RaceFileManager.loadAthletesFromFile(DataFile.PATH);
 			
-			// TODO: We need "removeAllRacers" and "addRacers"
-			for (RacingAthlete a : athletes)
-			{
-				raceManager.addRacer(a);
-			}
+			raceManager.setRacers(athletes);
 			
 			System.out.println("Racers successfully loaded.");
 		}

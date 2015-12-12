@@ -247,4 +247,11 @@ public class MyRaceManager implements Race
 	{
 		return (ArrayList<RacingAthlete>) _athletes.clone();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void setRacers(ArrayList<RacingAthlete> athletes)
+	{
+		this._athletes = (ArrayList<RacingAthlete>) athletes.clone();
+	}
 }

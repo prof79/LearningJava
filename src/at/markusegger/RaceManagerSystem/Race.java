@@ -77,6 +77,12 @@ public interface Race
 	 * 
 	 */
 	void removeAllRacers();
+	/**
+	 * Sets (replaces) the race participants all at a time.
+	 * 
+	 * @param athletes	The new set of racers to replace the old ones
+	 */
+	void setRacers(ArrayList<RacingAthlete> athletes);
 	
 	/**
 	 * 
