@@ -246,6 +246,11 @@ public class Program
 	 */
 	private static void clearRacers()
 	{
+		if (!checkRacers())
+		{
+			return;
+		}
+		
 		printSubheader("Clear Roster");
 		
 		raceManager.removeAllRacers();
@@ -261,6 +266,11 @@ public class Program
 	 */
 	private static void saveRacersToFile()
 	{
+		if (!checkRacers())
+		{
+			return;
+		}
+		
 		printSubheader("Save Racers");
 		
 		try
@@ -288,6 +298,11 @@ public class Program
 	 */
 	private static void loadRacersFromFile()
 	{
+		if (!checkRace())
+		{
+			return;
+		}
+		
 		printSubheader("Load Racers");
 		
 		try
