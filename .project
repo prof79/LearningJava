@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/at/markusegger/Learning/FileIO/File2.txt</name>
+			<type>1</type>
+			<location>C:/Users/MarkusME/workspace/LearningJava/src/at/markusegger/Learning/FileIO/File2.txt</location>
+		</link>
+	</linkedResources>
 </projectDescription>
