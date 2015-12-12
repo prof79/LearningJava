@@ -40,6 +40,11 @@ public class Runner extends RacingAthlete
 	 */
 	public String performRaceActivity()
 	{
+		if (getIsInjured())
+		{
+			throw new AthleteInjuredException("The runner broke their foot.");
+		}
+		
 		return "Running";
 	}
 	

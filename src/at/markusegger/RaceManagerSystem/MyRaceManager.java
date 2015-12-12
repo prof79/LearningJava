@@ -14,10 +14,13 @@ import at.markusegger.Utilities.Utilities;
  * This class manages a named event in a certain location and its participants.
  * 
  * @author MarkusME
- * @version 1.0
+ * @version 1.2
  */
 public class MyRaceManager implements Race
 {
+	static final public int MIN_ID = 1;
+	static final public int MAX_ID = 100000;
+	
 	private String _raceName;
 	private double _raceDistance;
 	private String _raceLocation;
@@ -33,7 +36,8 @@ public class MyRaceManager implements Race
 	{
 		_rand = new Random();
 		
-		_nextID = _rand.nextInt(999999);
+		_nextID = _rand.nextInt(MAX_ID) + 1;
+		//_nextID = 99998;
 		
 		_athletes = new ArrayList<RacingAthlete>();
 	}
@@ -105,7 +109,14 @@ public class MyRaceManager implements Race
 		}
 		
 		// We mustn't forget the contestant ID.
-		athlete.setContestantID(_nextID++);
+		athlete.setContestantID(_nextID);
+		
+		_nextID = ++_nextID % MAX_ID;
+		
+		if (_nextID < MIN_ID)
+		{
+			_nextID = MIN_ID;
+		}
 		
 		return _athletes.add(athlete);
 	}

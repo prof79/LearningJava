@@ -15,7 +15,7 @@ import java.util.Scanner;
  * TODO: DRY code smell, generics possible?
  * 
  * @author MarkusME
- * @version 0.7 
+ * @version 0.8
  */
 final public class Utilities
 {
@@ -177,6 +177,27 @@ final public class Utilities
 		throws IndexOutOfBoundsException
 	{
 		validateNumberInRange(value,  minValue, Double.MAX_VALUE);
+	}
+	
+	/**
+	 * Validates that a string is not null or empty ("").
+	 * 
+	 * @param str	The string to check.
+	 * 
+	 * @throws IllegalArgumentException
+	 */
+	static public void validateStringNotNullOrEmpty(String str)
+		throws IllegalArgumentException
+	{
+		if (str == null)
+		{
+			throw new IllegalArgumentException("String is null");
+		}
+		
+		if (str.isEmpty())
+		{
+			throw new IllegalArgumentException("String is empty");
+		}
 	}
 	
 	/**
