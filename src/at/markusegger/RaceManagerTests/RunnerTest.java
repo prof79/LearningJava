@@ -94,6 +94,18 @@ public class RunnerTest extends RacingAthleteTest
 						, runner1.toString().contains(_shoes));
 	}
 
+	/**
+	 * Tests the toDataString() method.
+	 */
+	@Test
+	public void testToDataString()
+	{
+		super.testToDataString();
+		
+		assertTrue("Runner.toDataString() does not contain shoeBrand property"
+						, runner1.toDataString().contains("shoeBrand="));
+	}
+	
 	@Override
 	protected RacingAthlete getDefaultRacingAthlete()
 	{

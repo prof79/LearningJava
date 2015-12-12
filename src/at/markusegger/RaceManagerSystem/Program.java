@@ -3,12 +3,14 @@
  */
 package at.markusegger.RaceManagerSystem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import at.markusegger.Utilities.Utilities;
 import at.markusegger.RaceManagerObjects.*;
 import at.markusegger.RaceManagerSearch.*;
+import at.markusegger.RaceManagerData.*;
 
 /**
  * This is the main part and console GUI for the race manager.
@@ -24,6 +26,9 @@ public class Program
 	static final private Scanner scanner = new Scanner(System.in);
 	static private boolean quitFlag = false;
 	static private MyRaceManager raceManager;
+	
+	static private int minMenuID;
+	static private int maxMenuID;
 	
 	/**
 	 * This is the main entry point for the race manager application.
@@ -49,7 +54,7 @@ public class Program
 	 */
 	static private int getInput()
 	{
-		return Utilities.readIntFromKeyboard("Your choice: ", 1, 8);
+		return Utilities.readIntFromKeyboard("Your choice: ", minMenuID, maxMenuID);
 	}
 
 	/**
@@ -138,8 +143,14 @@ public class Program
 		System.out.println("Enter 5 to get the winner");
 		System.out.println("Enter 6 to list the racers");
 		System.out.println("Enter 7 to get infos about the race");
-		System.out.println("Enter 8 to quit");
+		System.out.println("Enter 8 to clear the roster of racers");
+		System.out.println("Enter 9 to load racers from file");
+		System.out.println("Enter 10 to save racers to file");
+		System.out.println("Enter 11 to quit");
 		System.out.println(stars);
+		
+		minMenuID = 1;
+		maxMenuID = 11;
 	}
 	
 	/**
@@ -199,8 +210,23 @@ public class Program
 				// Race info
 				raceInfo();
 				break;
-				
+			
 			case 8:
+				// Clear racers
+				clearRacers();
+				break;
+				
+			case 9:
+				// Load racers from file
+				loadRacersFromFile();
+				break;
+				
+			case 10:
+				// Save racers to file
+				saveRacersToFile();
+				break;
+				
+			case 11:
 				// Quit
 				quitFlag = true;
 				System.out.println("Exiting ...");
@@ -212,6 +238,79 @@ public class Program
 								, choice
 								, "handleInput()"));
 		}
+	}
+
+	/**
+	 * Clears (removes) all racers from the roster.
+	 * TODO: Interactively ask before
+	 */
+	private static void clearRacers()
+	{
+		printSubheader("Clear Roster");
+		
+		raceManager.removeAllRacers();
+		
+		System.out.println("All racers have been removed from race.");
+		
+		System.out.println();
+	}
+
+	/**
+	 * Save racers to file.
+	 * TODO: Interactively ask before
+	 */
+	private static void saveRacersToFile()
+	{
+		printSubheader("Save Racers");
+		
+		try
+		{
+			RaceFileManager.saveAthletesToFile(
+					raceManager.getRacerList(),
+					DataFile.PATH);
+			
+			System.out.println("Racers successfully saved.");
+		}
+		catch (NullPointerException | IOException e)
+		{
+			System.out.println("Sorry, there was a problem while saving the racers:");
+			
+			e.printStackTrace();
+		}
+		
+		System.out.println();
+	}
+
+	/**
+	 * Load racers from file.
+	 * 
+	 * 	TODO: Interactively ask before
+	 */
+	private static void loadRacersFromFile()
+	{
+		printSubheader("Load Racers");
+		
+		try
+		{
+			ArrayList<RacingAthlete> athletes =
+					RaceFileManager.loadAthletesFromFile(DataFile.PATH);
+			
+			// TODO: We need "removeAllRacers" and "addRacers"
+			for (RacingAthlete a : athletes)
+			{
+				raceManager.addRacer(a);
+			}
+			
+			System.out.println("Racers successfully loaded.");
+		}
+		catch (NullPointerException | IllegalArgumentException | IOException e)
+		{
+			System.out.println("Sorry, couldn't load racers from file:");
+			
+			e.printStackTrace();
+		}
+		
+		System.out.println();
 	}
 
 	/**

@@ -77,5 +77,14 @@ public class Biker extends RacingAthlete
 		return String.format("%s using clips: %b"
 								, super.toString()
 								, getUsingClips());
-	}	
+	}
+	
+	@Override
+	public String toDataString()
+	{
+		return String.format("%s;usingClips=%s"
+								, super.toDataString()
+								, getUsingClips()
+								);
+	}
 }

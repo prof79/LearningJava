@@ -272,4 +272,29 @@ abstract public class RacingAthleteTest
 						, athleteString.contains(Integer.toString(_defaultID))
 						);
 	}
+	
+	/**
+	 * Tests the toDataString() method.
+	 */
+	@Test
+	public void testToDataString()
+	{
+		String athleteDataString = defaultAthlete.toDataString();
+		
+		assertTrue("RacingAthlete.toDataString() does not contain name property"
+						, athleteDataString.contains("name=")
+						);
+		
+		assertTrue("RacingAthlete.toDataString() does not contain age property"
+						, athleteDataString.contains("age=")
+						);
+		
+		assertTrue("RacingAthlete.toDataString() does not contain contestantID property"
+						, athleteDataString.contains("contestantID=")
+						);
+		
+		assertTrue("RacingAthlete.toDataString() does not contain isInjured property"
+						, athleteDataString.contains("isInjured=")
+						);
+	}
 }

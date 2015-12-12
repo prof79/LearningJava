@@ -144,4 +144,20 @@ abstract public class RacingAthlete implements Person, RaceParticipant
 								, performRaceActivity()
 								);
 	}
+	
+	/**
+	 * Helper method for data persistence. Serializes the athlete to a text string.
+	 * 
+	 * @return A textual and parseable representation of a {@link RacingAthlete}
+	 */
+	public String toDataString()
+	{
+		return String.format("%s|name=%s;age=%d;contestantID=%d;isInjured=%b"
+								, getClass().getSimpleName().toUpperCase()
+								, getName()
+								, getAge()
+								, getContestantID()
+								, getIsInjured()
+								);
+	}
 }

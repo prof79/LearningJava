@@ -78,4 +78,13 @@ public class Runner extends RacingAthlete
 									, super.toString()
 									, _shoeBrand);
 	}
+	
+	@Override
+	public String toDataString()
+	{
+		return String.format("%s;shoeBrand=%s"
+								, super.toDataString()
+								, getShoeBrand()
+								);
+	}
 }

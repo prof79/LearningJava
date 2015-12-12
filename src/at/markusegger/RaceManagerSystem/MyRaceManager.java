@@ -217,4 +217,34 @@ public class MyRaceManager implements Race
 				, getDistance()
 				);
 	}
+
+	@Override
+	public boolean addRacers(ArrayList<RacingAthlete> athletes)
+	{
+		for (RacingAthlete a : athletes)
+		{
+			boolean result = this.addRacer(a);
+			
+			if (result = false)
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	@Override
+	public void removeAllRacers()
+	{
+		// TODO Auto-generated method stub
+		_athletes.clear();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<RacingAthlete> getRacerList()
+	{
+		return (ArrayList<RacingAthlete>) _athletes.clone();
+	}
 }

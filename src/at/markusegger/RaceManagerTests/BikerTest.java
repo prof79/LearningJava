@@ -94,6 +94,18 @@ public class BikerTest extends RacingAthleteTest
 						, biker1.toString().contains("clips"));
 	}
 	
+	/**
+	 * Tests the toDataString() method.
+	 */
+	@Test
+	public void testToDataString()
+	{
+		super.testToDataString();
+		
+		assertTrue("Biker.toDataString() does not contain usingClips property"
+						, biker1.toDataString().contains("usingClips="));
+	}
+	
 	@Override
 	protected RacingAthlete getDefaultRacingAthlete()
 	{

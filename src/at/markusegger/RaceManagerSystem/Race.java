@@ -3,6 +3,8 @@
  */
 package at.markusegger.RaceManagerSystem;
 
+import java.util.ArrayList;
+
 import at.markusegger.RaceManagerObjects.RacingAthlete;
 
 /**
@@ -57,12 +59,24 @@ public interface Race
 	 */
 	boolean addRacer(RacingAthlete athlete);
 	/**
+	 * Add multiple race participants.
+	 * 
+	 * @param athletes	The racers to add
+	 * @return True if successful otherwise false
+	 */
+	boolean addRacers(ArrayList<RacingAthlete> athletes);
+	/**
 	 * Remove a racer from the contest.
 	 * 
 	 * @param name		The name of the athlete to remove
 	 * @return True if the racer could be removed otherwise false
 	 */
 	boolean removeRacer(String name);
+	/**
+	 * Remove all racers from the contest, i. e. clear the participant list.
+	 * 
+	 */
+	void removeAllRacers();
 	
 	/**
 	 * 
@@ -84,6 +98,12 @@ public interface Race
 	 * @return An array of racing athletes
 	 */
 	RacingAthlete[] getRacers();
+	/**
+	 * Get all participants in the race.
+	 * 
+	 * @return An {@link ArrayList} of racing athletes
+	 */
+	ArrayList<RacingAthlete> getRacerList();
 	
 	/**
 	 * 
