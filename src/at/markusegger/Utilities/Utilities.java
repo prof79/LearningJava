@@ -3,6 +3,11 @@
  */
 package at.markusegger.Utilities;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.Closeable;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -266,5 +271,36 @@ final public class Utilities
 		}
 		
 		return choice;
+	}
+	
+	/**
+	 * Closes any I/O object like {@link FileInputStream}, {@link BufferedInputStream},
+	 * {@link BufferedOutputStream}, ... that implements {@link Closeable}.
+	 * 
+	 * @param closeable		An object that has the {@link Closeable} interface implemented
+	 *
+	 * TODO: Unit tests missing
+	 */
+	static public Exception closeHelper(Closeable closeable)
+	{
+		Exception result = null;
+		
+		try
+		{
+			if (closeable != null)
+			{
+				closeable.close();
+			}
+		}
+		catch (IOException ioex)
+		{
+			result = ioex;
+		}
+		finally
+		{
+			closeable = null;
+		}
+		
+		return result;
 	}
 }
