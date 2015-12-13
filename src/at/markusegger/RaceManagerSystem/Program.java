@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import at.markusegger.Utilities.ConsoleBase;
 import at.markusegger.Utilities.Utilities;
 import at.markusegger.RaceManagerObjects.*;
 import at.markusegger.RaceManagerSearch.*;
@@ -16,19 +17,23 @@ import at.markusegger.RaceManagerData.*;
  * This is the main part and console GUI for the race manager.
  * 
  * @author MarkusME
- * @version 1.2
+ * @version 1.4
  */
-public class Program
+public class Program extends ConsoleBase
 {
-	static final private int lineWidth = 80;
-	static final private String stars = Utilities.repeatStar(lineWidth);
-	static final private String title = "Markus' Java Race Manager";
-	static final private Scanner scanner = new Scanner(System.in);
-	static private boolean quitFlag = false;
+	static final private ConsoleBase instance = new Program();
+	
 	static private MyRaceManager raceManager;
 	
-	static private int minMenuID;
-	static private int maxMenuID;
+	/**
+	 * Retrieve the current instance of ConsoleBase implementation.
+	 * 
+	 * @return	The current instance of ConsoleBase implementation.
+	 */
+	static private ConsoleBase getInstance()
+	{
+		return instance;
+	}
 	
 	/**
 	 * This is the main entry point for the race manager application.
@@ -37,24 +42,9 @@ public class Program
 	 */
 	public static void main(String[] args)
 	{
-		printHeader();
-		
-		while (!quitFlag)
-		{
-			printMenu();
-			handleInput(getInput());			
-		}
-	}
+		getInstance().setTitle("Markus' Java Race Manager");
 
-	/**
-	 * Retrieves a menu choice from keyboard.
-	 * Menu items are unsigned integers, e. g. 1 to 7.
-	 * 
-	 * @return The choice of the user as an integer
-	 */
-	static private int getInput()
-	{
-		return Utilities.readIntFromKeyboard("Your choice: ", minMenuID, maxMenuID);
+		getInstance().mainLoop();
 	}
 
 	/**
@@ -108,34 +98,12 @@ public class Program
 	}
 	
 	/**
-	 * Prints the application's title.
-	 */
-	static private void printHeader()
-	{
-		System.out.println(stars);
-		
-		System.out.println(String.format("*** %-" + (lineWidth - 8) + "s ***", title.toUpperCase()));
-	}
-	
-	/**
-	 * Print a sub-header.
-	 * 
-	 * @param caption	The sub-header's name
-	 */
-	static private void printSubheader(String caption)
-	{
-		System.out.println(stars);
-		System.out.println(caption.trim().toUpperCase());
-		System.out.println(stars);
-		System.out.println();
-	}
-	
-	/**
 	 * Print the application menu/available choices.
 	 */
-	static private void printMenu()
+	@Override
+	public void printMenu()
 	{
-		System.out.println(stars);
+		System.out.println(getStars());
 		System.out.println("Enter 1 to create a new race");
 		System.out.println("Enter 2 to add a new racer");
 		System.out.println("Enter 3 to remove a racer");
@@ -147,10 +115,10 @@ public class Program
 		System.out.println("Enter 9 to load racers from file");
 		System.out.println("Enter 10 to save racers to file");
 		System.out.println("Enter 11 to quit");
-		System.out.println(stars);
+		System.out.println(getStars());
 		
-		minMenuID = 1;
-		maxMenuID = 11;
+		setMinMenuID(1);
+		setMaxMenuID(11);
 	}
 	
 	/**
@@ -158,11 +126,11 @@ public class Program
 	 */
 	static private void printFindMenu()
 	{
-		System.out.println(stars);
+		System.out.println(getInstance().getStars());
 		System.out.println("Enter 1 to search by partial name");
 		System.out.println("Enter 2 to search by contestant ID");
 		System.out.println("Enter 3 to search by athlete type");
-		System.out.println(stars);
+		System.out.println(getInstance().getStars());
 	}
 	
 	/**
@@ -170,7 +138,8 @@ public class Program
 	 * 
 	 * @param choice		The number of the menu item chosen
 	 */
-	static private void handleInput(int choice)
+	@Override
+	public void handleInput(int choice)
 	{
 		System.out.println();
 		
@@ -228,7 +197,7 @@ public class Program
 				
 			case 11:
 				// Quit
-				quitFlag = true;
+				setQuitFlag(true);
 				System.out.println("Exiting ...");
 				break;
 			
@@ -251,7 +220,7 @@ public class Program
 			return;
 		}
 		
-		printSubheader("Clear Roster");
+		getInstance().printSubheader("Clear Roster");
 		
 		raceManager.removeAllRacers();
 		
@@ -271,7 +240,7 @@ public class Program
 			return;
 		}
 		
-		printSubheader("Save Racers");
+		getInstance().printSubheader("Save Racers");
 		
 		try
 		{
@@ -303,7 +272,7 @@ public class Program
 			return;
 		}
 		
-		printSubheader("Load Racers");
+		getInstance().printSubheader("Load Racers");
 		
 		try
 		{
@@ -334,7 +303,7 @@ public class Program
 		String eventName, eventLocation;
 		double raceDistance;
 		
-		printSubheader("Create a race");
+		getInstance().printSubheader("Create a race");
 		
 		System.out.print("Event name: ");
 		eventName = scanner.nextLine().trim();
@@ -368,7 +337,7 @@ public class Program
 		String name;
 		int age;
 		
-		printSubheader("Add racer");
+		getInstance().printSubheader("Add racer");
 		
 		Class<?> classType = getAthleteTypeInput();
 		
@@ -476,7 +445,7 @@ public class Program
 		String name;
 		RacingAthlete athlete;
 		
-		printSubheader("Remove racer");
+		getInstance().printSubheader("Remove racer");
 		
 		System.out.print("What is the name of the racer you want to remove? ");
 		
@@ -519,7 +488,7 @@ public class Program
 			return;
 		}
 
-		printSubheader("Find racer");
+		getInstance().printSubheader("Find racer");
 
 		printFindMenu();
 		
@@ -635,7 +604,7 @@ public class Program
 			return;
 		}
 		
-		printSubheader("Winning ceremony");
+		getInstance().printSubheader("Winning ceremony");
 		
 		System.out.println(raceManager.toString());
 		System.out.println();
@@ -656,7 +625,7 @@ public class Program
 			return;
 		}
 		
-		printSubheader("Racer list");
+		getInstance().printSubheader("Racer list");
 		
 		RacingAthlete[] athletes = raceManager.getRacers();
 		
@@ -674,7 +643,7 @@ public class Program
 	 */
 	private static void raceInfo()
 	{
-		printSubheader("Race info");
+		getInstance().printSubheader("Race info");
 		
 		System.out.println(raceManager.toString());
 		System.out.println();
