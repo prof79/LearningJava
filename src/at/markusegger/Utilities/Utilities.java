@@ -295,6 +295,55 @@ final public class Utilities
 	}
 	
 	/**
+	 * Retrieves a long from keyboard.
+	 * Input is limited to a certain range (inclusive). You may use
+	 * Long.MIN_VALUE and Long.MAX_VALUE as arguments.
+	 * 
+	 * @param prompt	The input prompt message or null. The prompt will print without a newline (System.out.print())
+	 * @param minValue	The minimum long value (inclusive)
+	 * @param maxValue	The maximum long value (inclusive)
+	 * @return The user's choice as a long
+	 * 
+	 * TODO: Add unit tests, generic simplification?
+	 */
+	static public long readLongFromKeyboard(String prompt, long minValue, long maxValue)
+	{
+		final Scanner scanner = new Scanner(System.in);
+		
+		long choice = Long.MIN_VALUE;
+		boolean invalidInput = true;
+		
+		while (invalidInput)
+		{
+			if (prompt != null && !prompt.isEmpty())
+			{
+				System.out.print(prompt);
+			}
+			
+			String inputLine = scanner.nextLine().trim();
+			
+			try
+			{
+				choice = Long.parseLong(inputLine);
+				
+				Utilities.validateNumberInRange(choice, minValue, maxValue);
+				
+				invalidInput = false;
+			}
+			catch (NumberFormatException nfe)
+			{
+				System.out.println("Invalid input! Not a number: " + inputLine);
+			}
+			catch (IndexOutOfBoundsException ioobe)
+			{
+				System.out.println("Invalid input! " + ioobe.getMessage());
+			}
+		}
+		
+		return choice;
+	}
+	
+	/**
 	 * Closes any I/O object like {@link FileInputStream}, {@link BufferedInputStream},
 	 * {@link BufferedOutputStream}, ... that implements {@link Closeable}.
 	 * 
