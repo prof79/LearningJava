@@ -3,14 +3,20 @@
  */
 package at.markusegger.CreditCardBase;
 
+import java.io.Serializable;
+
 /**
  * A model for a credit card.
  * 
  * @author MarkusME
- * @version 1.0
+ * @version 1.1
  */
-public class CreditCard
+public class CreditCard implements Serializable
 {
+	/**
+	 * Version ID for serialization purposes.
+	 */
+	private static final long serialVersionUID = 5951017308498309656L;
 	private long _number;
 	private double _balance;
 	
