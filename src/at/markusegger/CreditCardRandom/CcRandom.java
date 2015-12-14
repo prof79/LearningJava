@@ -27,7 +27,9 @@ public final class CcRandom extends ConsoleBase
 	static private RandomAccessFile dataFile;
 	
 	/**
-	 * @param args
+	 * The main entry point for the credit card manager program.
+	 * 
+	 * @param args		The command-line arguments to the program
 	 */
 	public static void main(String[] args)
 	{
@@ -122,14 +124,17 @@ public final class CcRandom extends ConsoleBase
 		}
 	}
 
+	/**
+	 * List all credit cards saved in the system so far.
+	 */
 	private void viewCards()
 	{
-		printSubheader("View Cards");
-		
 		if (!checkCards())
 		{
 			return;
 		}
+		
+		printSubheader("View Cards");
 		
 		long pos = 0;
 		
@@ -158,6 +163,12 @@ public final class CcRandom extends ConsoleBase
 		System.out.println();
 	}
 
+	/**
+	 * Helper method to check for a valid list of credit cards in the system
+	 * (i. e. RandomAccessFile is not empty).
+	 * 
+	 * @return True when there are any cards saved in the system otherwise false
+	 */
 	private boolean checkCards()
 	{
 		try
@@ -180,15 +191,20 @@ public final class CcRandom extends ConsoleBase
 		}
 	}
 
+	/**
+	 * View the infos of a specific credit card.
+	 */
 	private void viewCard()
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Add a credit card to the sytem.
+	 */
 	private void addCard()
 	{
-		// TODO Auto-generated method stub
 		printSubheader("Add Card");
 		
 		long number = getNumberInput();
@@ -196,11 +212,11 @@ public final class CcRandom extends ConsoleBase
 		
 		try
 		{
-		addCardToFile(new CreditCard(number, balance));
-		
-		System.out.println();
-		
-		System.out.println("Card added.");
+			addCardToFile(new CreditCard(number, balance));
+			
+			System.out.println();
+			
+			System.out.println("Card added.");
 		}
 		catch (IOException ioex)
 		{
@@ -212,18 +228,30 @@ public final class CcRandom extends ConsoleBase
 		System.out.println();
 	}
 
+	/**
+	 * Update the data of a specific credit card.
+	 */
 	private void updateCard()
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Remove a credit card from the system.
+	 */
 	private void removeCard()
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Retrieve a valid credit card number from keyboard input.
+	 * In our toy example valid card numbers consist of 16 consecutive digits.
+	 * 
+	 * @return	The credit card number as a {@link long} value
+	 */
 	private long getNumberInput()
 	{
 		long number = Long.MIN_VALUE;
@@ -252,11 +280,22 @@ public final class CcRandom extends ConsoleBase
 		return number;
 	}
 
+	/**
+	 * Retrieve an account balance value from keyboard input.
+	 * 
+	 * @return	The card's balance as a {@link double} value
+	 */
 	private double getBalanceInput()
 	{
 		return at.markusegger.Utilities.Utilities.readDoubleFromKeyboard("Enter the card's balance: ", Double.MIN_VALUE, Double.MAX_VALUE);
 	}
 	
+	/**
+	 * Internal method to save a card into the RandomAccessFile.
+	 * 
+	 * @param newCard			The credit card data to be saved
+	 * @throws IOException
+	 */
 	private void addCardToFile(CreditCard newCard)
 		throws IOException
 	{
